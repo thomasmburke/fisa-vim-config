@@ -1,11 +1,6 @@
-" Fisa-vim-config
-" http://fisadev.github.io/fisa-vim-config/
-" version: 8.3.1
-
-" ============================================================================
 " Vim-plug initialization
 " Avoid modify this section, unless you are very sure of what you are doing
-
+" ============================================================================
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
@@ -22,7 +17,8 @@ if vim_plug_just_installed
 endif
 
 " Obscure hacks done, you can now modify the rest of the .vimrc as you wish :)
-
+" Set the mapleader for command shortcuts
+let mapleader=","
 " ============================================================================
 " Active plugins
 " You can disable or add new ones here:
@@ -31,13 +27,15 @@ endif
 " want to use
 call plug#begin('~/.vim/plugged')
 
-" Plugins from github repos:
-
 " Override configs by directory 
 Plug 'arielrossanigo/dir-configs-override.vim'
 " Better file browser
+" <F3> toggle nerdtree display select a file with i to open it in another win
+" <Leader>nt to open nerdtree with the current file selected
 Plug 'scrooloose/nerdtree'
 " Code commenter
+" <Leader>cc to comment a line (you can select a group of lines in visual block mode and do the same thing)
+" <Leader>cu to uncomment a line of block of lines in visual block mode
 Plug 'scrooloose/nerdcommenter'
 " Class/module browser
 Plug 'majutsushi/tagbar'
@@ -49,8 +47,17 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'mattn/emmet-vim'
 " Git integration
 Plug 'motemen/git-vim'
+" - repo recomended I switch to fugitive
+" GitAdd {filename} <LEADER>ga (this defaults to the current file)
+" GitCommit  "" <Leader>gc
+" GitPush origin branchname
+" GitPull
+" GitStatus <Leader>gs
+" GitCheckout
+" Git <args> does any git command
 " Tab list panel
 Plug 'kien/tabman.vim'
+" command is 'tf'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -60,6 +67,7 @@ Plug 'fisadev/fisa-vim-colorscheme'
 Plug 'rosenfeld/conque-term'
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
+" command is <Leader>t (this summarizes TODOs)
 " Surround
 Plug 'tpope/vim-surround'
 " Autoclose
@@ -68,8 +76,18 @@ Plug 'Townk/vim-autoclose'
 Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
+" [- : Move to previous line of lesser indent than the current line.
+" [+ : Move to previous line of greater indent than the current line.
+" ]- : Move to next line of lesser indent than the current line.
+" ]+ : Move to next line of greater indent than the current line.
 " Python autocompletion, go to definition.
 Plug 'davidhalter/jedi-vim'
+" <Leader>g goto funciton (works with imports)
+" <Leader>o show all occurances of a funciton
+" <Leader>a goto assignment of a variable
+" K gives you pyDoc info on a function
+" <Leader>r change all function names
+" :Pyimport os (opens the os module)
 " Better autocompletion
 Plug 'Shougo/neocomplcache.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
@@ -81,12 +99,16 @@ Plug 'garbas/vim-snipmate'
 Plug 'mhinz/vim-signify'
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
+" ctrl i
 " Drag visual blocks arround
 Plug 'fisadev/dragvisuals.vim'
 " Window chooser
 Plug 't9md/vim-choosewin'
+" press '-'
 " Python and other languages code checker
 Plug 'scrooloose/syntastic'
+" <Leader>e
+" - don't forget to save first with :w
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 " Ack code search (requires ack installed in the system)
@@ -253,7 +275,7 @@ let g:tagbar_autofocus = 1
 " toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
-nmap ,t :NERDTreeFind<CR>
+nmap ,nt :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
@@ -265,18 +287,6 @@ map <F2> :TaskList<CR>
 
 " CtrlP ------------------------------
 
-" file finder mapping
-let g:ctrlp_map = ',e'
-" tags (symbols) in current file finder mapping
-nmap ,g :CtrlPBufTag<CR>
-" tags (symbols) in all files finder mapping
-nmap ,G :CtrlPBufTagAll<CR>
-" general code finder in all files mapping
-nmap ,f :CtrlPLine<CR>
-" recent files finder mapping
-nmap ,m :CtrlPMRUFiles<CR>
-" commands finder mapping
-nmap ,c :CtrlPCmdPalette<CR>
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
@@ -306,18 +316,12 @@ nmap <leader>e :Errors<CR>
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
 let g:syntastic_enable_signs = 0
-" custom icons (enable them if you use a patched font, and enable the previous 
-" setting)
-"let g:syntastic_error_symbol = '✗'
-"let g:syntastic_warning_symbol = '⚠'
-"let g:syntastic_style_error_symbol = '✗'
-"let g:syntastic_style_warning_symbol = '⚠'
 
 " Jedi-vim ------------------------------
 
 " All these mappings work only for python code:
 " Go to definition
-let g:jedi#goto_command = ',d'
+let g:jedi#goto_command = ',g'
 " Find ocurrences
 let g:jedi#usages_command = ',o'
 " Find assignments
@@ -327,9 +331,6 @@ nmap ,D :tab split<CR>:call jedi#goto()<CR>
 
 " NeoComplCache ------------------------------
 
-" most of them not documented because I'm not sure how they work
-" (docs aren't good, had to do a lot of trial and error to make 
-" it play nice)
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_ignore_case = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -396,15 +397,5 @@ let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#whitespace#enabled = 0
 
-" to use fancy symbols for airline, uncomment the following lines and use a
-" patched font (more info on the README.rst)
-"if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-"endif
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
-"let g:airline_symbols.linenr = '⭡'
+set bs=2 " make backspace act like normal again
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
