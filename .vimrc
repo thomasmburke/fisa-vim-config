@@ -399,3 +399,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 set bs=2 " make backspace act like normal again
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+
