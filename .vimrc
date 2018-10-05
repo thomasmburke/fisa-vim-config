@@ -28,7 +28,7 @@ let mapleader=","
 call plug#begin('~/.vim/plugged')
 
 " Override configs by directory 
-Plug 'arielrossanigo/dir-configs-override.vim'
+"Plug 'arielrossanigo/dir-configs-override.vim'
 " Better file browser
 " <F3> toggle nerdtree display select a file with i to open it in another win
 " <Leader>nt to open nerdtree with the current file selected
@@ -40,11 +40,11 @@ Plug 'scrooloose/nerdcommenter'
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " Code and files fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 " Extension to ctrlp, for fuzzy command finder
-Plug 'fisadev/vim-ctrlp-cmdpalette'
+" Plug 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 " Git integration
 Plug 'motemen/git-vim'
 " - repo recomended I switch to fugitive
@@ -64,7 +64,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Terminal Vim with 256 colors colorscheme
 Plug 'fisadev/fisa-vim-colorscheme'
 " Consoles as buffers
-Plug 'rosenfeld/conque-term'
+"Plug 'rosenfeld/conque-term'
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
 " command is <Leader>t (this summarizes TODOs)
@@ -73,7 +73,7 @@ Plug 'tpope/vim-surround'
 " Autoclose
 Plug 'Townk/vim-autoclose'
 " Indent text object
-Plug 'michaeljsmith/vim-indent-object'
+"Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
 " [- : Move to previous line of lesser indent than the current line.
@@ -91,17 +91,17 @@ Plug 'davidhalter/jedi-vim'
 " Better autocompletion
 Plug 'Shougo/neocomplcache.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'honza/vim-snippets'
+"Plug 'garbas/vim-snipmate'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
 " ctrl i
 " Drag visual blocks arround
-Plug 'fisadev/dragvisuals.vim'
+"Plug 'fisadev/dragvisuals.vim'
 " Window chooser
 Plug 't9md/vim-choosewin'
 " press '-'
@@ -112,7 +112,7 @@ Plug 'scrooloose/syntastic'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 " Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
 if has('python')
     " YAPF formatter for Python
     Plug 'pignacio/vim-yapf-format'
@@ -129,7 +129,7 @@ endif
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
 " XML/HTML tags navigation
-Plug 'vim-scripts/matchit.zip'
+"Plug 'vim-scripts/matchit.zip'
 " Gvim colorscheme
 Plug 'vim-scripts/Wombat'
 " Yank history navigation
@@ -215,8 +215,8 @@ set completeopt-=preview
 ca w!! w !sudo tee "%"
 
 " simple recursive grep
-nmap ,r :Ack 
-nmap ,wr :Ack <cword><CR>
+"nmap ,r :Ack 
+"nmap ,wr :Ack <cword><CR>
 
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
@@ -288,25 +288,25 @@ map <F2> :TaskList<CR>
 " CtrlP ------------------------------
 
 " to be able to call CtrlP with default search text
-function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    execute ':CtrlP' . a:ctrlp_command_end
-    call feedkeys(a:search_text)
-endfunction
+"function! CtrlPWithSearchText(search_text, ctrlp_command_end)
+"    execute ':CtrlP' . a:ctrlp_command_end
+"    call feedkeys(a:search_text)
+"endfunction
 " same as previous mappings, but calling with current word as default text
-nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+"nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+"nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+"nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+"nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+"nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+"nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+"nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
-let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_working_path_mode = 0
 " ignore these files and folders on file finder
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules)$',
-  \ 'file': '\.pyc$\|\.pyo$',
-  \ }
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules)$',
+"  \ 'file': '\.pyc$\|\.pyo$',
+"  \ }
 
 " Syntastic ------------------------------
 
@@ -361,12 +361,12 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 " DragVisuals ------------------------------
 
 " mappings to move blocks in 4 directions
-vmap <expr> <S-M-LEFT> DVB_Drag('left')
-vmap <expr> <S-M-RIGHT> DVB_Drag('right')
-vmap <expr> <S-M-DOWN> DVB_Drag('down')
-vmap <expr> <S-M-UP> DVB_Drag('up')
+"vmap <expr> <S-M-LEFT> DVB_Drag('left')
+"vmap <expr> <S-M-RIGHT> DVB_Drag('right')
+"vmap <expr> <S-M-DOWN> DVB_Drag('down')
+"vmap <expr> <S-M-UP> DVB_Drag('up')
 " mapping to duplicate block
-vmap <expr> D DVB_Duplicate()
+"vmap <expr> D DVB_Duplicate()
 
 " Signify ------------------------------
 
@@ -401,5 +401,3 @@ set bs=2 " make backspace act like normal again
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
-
-
