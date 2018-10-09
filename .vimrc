@@ -32,6 +32,7 @@ call plug#begin('~/.vim/plugged')
 " Better file browser
 " <F3> toggle nerdtree display select a file with i to open it in another win
 " <Leader>nt to open nerdtree with the current file selected
+" press shift i when in nerd tree display to see hidden files
 Plug 'scrooloose/nerdtree'
 " Code commenter
 " <Leader>cc to comment a line (you can select a group of lines in visual block mode and do the same thing)
